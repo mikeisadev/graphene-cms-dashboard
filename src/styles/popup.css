@@ -1,0 +1,11 @@
+.popup-wrap {
+    @apply fixed inset-0 z-[100];
+}
+
+.popup-wrap .popup-overlay {
+    @apply absolute bg-black/40 w-full h-full z-[101];
+}
+
+.popup-wrap .popup {
+    @apply absolute bg-white z-[102] m-auto w-max h-max rounded-md p-4 inset-0;
+}

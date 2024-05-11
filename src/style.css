@@ -1,0 +1,247 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Fonts */
+@import url('./fonts/fonts.css');
+
+/* Main styles */
+@import url('./styles/main.css');
+
+/* PopUp */
+@import url('./styles/popup.css');
+
+/* Page */
+.page-header {
+    @apply mb-5;
+}
+
+.page-title {
+    @apply text-3xl font-light mb-2;
+}
+
+.page-desc {
+    @apply text-[15px];
+}
+
+/* Header */
+#header {
+    @apply fixed w-full h-[60px] bg-white z-10 shadow-md;
+}
+
+/* Main */
+#main {
+    @apply bg-slate-100 pt-[60px] relative flex z-[1] min-h-screen;
+}
+
+#main.sidebar-closed #sidebar {
+    @apply left-[-240px] transition-[left];
+}
+
+#main.sidebar-closed #workspace {
+    @apply px-[1.5rem] transition-[padding];
+}
+
+/* Sidebar */
+#sidebar {
+    @apply fixed w-[240px] px-[1.5rem] left-[0px] z-[5] transition-[left] overflow-y-scroll;
+    height: calc(100% - 60px) ;
+}
+
+.menu {
+    @apply flex flex-col gap-[5px];
+}
+
+.nav-links h6 {
+    @apply font-medium uppercase text-sm tracking-wider;
+}
+
+.nav-links .nav-group:not(:first-child) h6 {
+    @apply mt-6 mb-2;
+}
+
+.nav-links ul ul {
+    @apply ml-[1.5rem];
+}
+
+.nav-links ul ul li {
+    @apply text-sm text-slate-600;
+}
+
+.nav-links .sub-menu.closed {
+    @apply h-0 hidden;
+}
+
+.menu-link a {
+    @apply flex justify-between cursor-pointer p-1.5 rounded-md transition-[background];
+}
+
+.menu-link > a.active {
+    @apply bg-white;
+}
+
+.menu-link > a:hover {
+    @apply bg-slate-200;
+}
+
+.sub-menu-link > a {
+    @apply transition-[color];
+}
+
+.sub-menu-link > a:hover, .sub-menu-link > a.active {
+    @apply text-sky-600;
+}
+
+.menu-link > a > i, .sub-menu-link > a > i {
+    @apply rotate-180 transition-[transform];
+}
+
+.menu-link.closed > a > i, .sub-menu-link.closed > a > i {
+    @apply rotate-0 transition-[transform];
+}
+
+.menu-link .sub-menu, .sub-menu-link .sub-menu {
+    @apply transition-[height];
+}
+
+.menu-link.closed .sub-menu, .sub-menu-link.closed .sub-menu {
+    @apply h-0 overflow-hidden transition-[height];
+}
+
+.menu-link .link-inner {
+    @apply flex gap-[8px];
+}
+
+/* Workspace */
+#workspace {
+    @apply relative pl-[240px] py-[1.5rem] pr-[1.5rem] h-full w-full transition-[padding] max-[768px]:p-[1.5rem];
+}
+
+/* Boxes */
+.content-box {
+    @apply bg-white rounded-md shadow-md p-5 my-5;
+}
+
+.box-layout {
+    @apply flex flex-wrap gap-[15px];
+}
+
+.link-box {
+    @apply rounded-md p-3 inline-block flex gap-[10px] transition-[background];
+}
+
+.link-box i {
+    @apply text-[1.8rem];
+}
+
+.link-box:hover {
+    @apply bg-slate-100;
+}
+
+/* General wrap class. */
+.wrap {
+    @apply md:w-[1200px] w-full;
+}
+
+.page-content {
+    @apply w-[60rem] mx-auto max-[1024px]:w-full;
+}
+
+.flex-between {
+    @apply flex justify-between content-center;
+}
+
+.new-content-wrap {
+    @apply flex gap-[20px];
+}
+
+.new-content-wrap .new-content {
+    @apply w-full;
+}
+
+.meta-boxes {
+    @apply flex flex-col gap-[20px] w-[300px];
+}
+
+.main-box {
+    @apply shadow-md p-4 rounded-md bg-white;
+}
+
+.meta-box {
+    @apply shadow-md p-2.5 rounded-md bg-white;
+}
+
+/* Loader wrap */
+.loader-wrap {
+    @apply fixed inset-0 w-screen h-screen flex content-center justify-center bg-white/70 z-[8];
+}
+
+.loader {
+    @apply animate-spin w-[50px] h-[50px] border-4 rounded-[50%] border-white border-t-[transparent] border-sky-600 m-auto;
+}
+
+/* Layouts */
+.col-2 > * {
+    @apply w-[49%];
+}
+
+/* Listing */
+.listing-wrap {
+    @apply shadow-md w-full bg-white rounded-md p-2;
+}
+
+/* Listing table */
+.listing-table {
+    @apply w-full text-left;
+}
+
+.listing-table tbody tr {
+    @apply transition-[background];
+}
+
+.listing-table tbody tr:hover, .listing-table tbody .active-item {
+    @apply bg-slate-50;
+}
+
+.listing-table tbody tr:not(:last-child) {
+    @apply border-b;
+}
+
+.listing-table tr button {
+    @apply w-[30px] h-[30px] rounded-full flex items-center justify-center;
+}
+
+.listing-table tr button.active {
+    @apply bg-sky-500 text-white rotate-90;
+}
+
+.listing-item > td, .listing-head th {
+    @apply p-3;
+}
+
+/* Listing dropdown */
+.listing-dropdown {
+    @apply bg-slate-50 fixed z-[5] left-0 top-0 shadow-md p-2 rounded-md w-[150px] text-sm rounded-md origin-top-right overflow-hidden;
+}
+
+.listing-dropdown button {
+    @apply w-full text-left rounded-sm p-1.5 justify-start;
+}
+
+.listing-dropdown button:hover {
+    @apply text-white bg-sky-500;
+}
+
+.listing-dropdown button.warning:hover {
+    @apply text-white bg-red-600;
+}
+
+/* Divider */
+.divider {
+    @apply h-[1px] bg-slate-300 w-full my-2;
+}
+
+/* Search bars. */
+.listing-search {
+    @apply p-2 border-slate-200 border rounded-md shadow-inner w-full;
+}

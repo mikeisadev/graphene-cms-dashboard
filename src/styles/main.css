@@ -1,0 +1,71 @@
+/* Buttons */
+button {
+    @apply transition-[background] inline-flex gap-[8px] justify-center;
+}
+
+.primary-btn {
+    @apply bg-gradient-to-b from-sky-400 to-sky-500 to-90% p-3 text-white rounded-md text-sm border border-sky-600 shadow-sm;
+}
+
+.primary-btn:hover {
+    @apply brightness-90;
+}
+
+.secondary-btn {
+    @apply bg-gradient-to-b from-white to-slate-200 to-90% py-2.5 px-4 text-gray-900 rounded-md text-sm border border-slate-300 shadow-sm;
+}
+
+/* Dropdown btn */
+.dropdown-btn-wrap {
+    @apply relative;
+}
+
+.dropdown-btn > button:first-child {
+    @apply rounded-r-none;
+}
+
+.dropdown-btn > button:last-child {
+    @apply rounded-l-none;
+}
+
+.dropdown-menu.closed {
+    @apply scale-0 transition-[transform];
+}
+
+.dropdown-menu {
+    @apply flex flex-col gap-[8px] text-sm absolute bg-white p-2 shadow-md rounded-md mt-2 right-0 scale-100 transition-[transform] origin-top-right;
+}
+
+.dropdown-menu > button {
+    @apply rounded-md transition-[background] p-2;
+}
+
+.dropdown-menu > button:hover {
+    @apply text-white bg-sky-500;
+}
+
+/* Inputs and forms */
+.field-row {
+    @apply mb-5;
+}
+
+.field-row:last-child {
+    @apply m-0;
+}
+
+.field-row > label {
+    @apply w-full mb-1 block font-medium text-sm;
+}
+
+input[type="text"] {
+    @apply p-2 border border-slate-200 rounded-md w-full shadow-inner;
+}
+
+/* Quill editor */
+.ql-toolbar.ql-snow {
+    @apply border-slate-200 rounded-t-md;
+}
+
+.ql-container.ql-snow {
+    @apply border-slate-200 shadow-inner rounded-b-md h-[500px];
+}
