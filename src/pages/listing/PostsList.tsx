@@ -12,6 +12,9 @@ export default function PostsList(props: PostsListProps) {
     const { toggleLoading } = useDashboard() as DashboardCtxInterface;
     const [data, setData] = useState(null);
 
+    /**
+     * Here we manage CRUD OPERATIONS.
+     */
     useEffect(() => {
         toggleLoading(true)
 

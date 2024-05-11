@@ -6,15 +6,14 @@ import { useListing } from "../context/ListingContext";
 export default function Listing(props: ListingProps) {
     const { data } = props;
 
-    const { items } = useListing() as ListingCtxInterface
+    const { items, selectAll, setSelectAll } = useListing() as ListingCtxInterface
 
     function selectAllItems() {
-        console.log('selecting all')
-        selectSingleItem()
+        setSelectAll()
     }
 
-    function selectSingleItem() {
-
+    function selectItem(e: React.MouseEvent) {
+        e.target.checked = !e.target.checked
     }
 
     return (
@@ -34,7 +33,7 @@ export default function Listing(props: ListingProps) {
                         </tr>
                     </thead>
                     <tbody>
-                        {data.map(el => <ListingItem key={useId()} selectItem={selectSingleItem} />)}
+                        {data.map(el => <ListingItem key={useId()} selected={selectAll} selectItem={selectItem}/>)}
                     </tbody>
                 </table>
             </div>

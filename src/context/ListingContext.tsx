@@ -10,8 +10,16 @@ export function useListing() {
 export default function ListingProvider(props: ListingProviderProps) {
     const [listing, setListing] = useState<ListingProviderState>({
         items: {},
-        menus: {}
+        menus: {},
+        selectAll: false,
     });  
+
+    /**
+     * Select all items in a list.
+     */
+    function setSelectAll() {
+        setListing({...listing, selectAll: !listing.selectAll})
+    }
     
     useEffect(() => {
         /**
@@ -189,7 +197,7 @@ export default function ListingProvider(props: ListingProviderProps) {
     }
 
     return (
-        <ListingCtx.Provider value={{...listing, openDropdown, setDropdownMenu, getDropdown, getOpenedDropdown, closeAllDropdownsButOne, setListingItem, getListingItem}}>
+        <ListingCtx.Provider value={{...listing, setSelectAll, openDropdown, setDropdownMenu, getDropdown, getOpenedDropdown, closeAllDropdownsButOne, setListingItem, getListingItem}}>
             {props.children}
         </ListingCtx.Provider>
     )

@@ -26,6 +26,7 @@ export interface DashboardProviderProps extends WithChildrens {}
  * Listing context.
  */
 export interface ListingCtxInterface extends ListingProviderState {
+    setSelectAll:() => void;
     openDropdown: (menuId: string|number, triggerBtn: HTMLButtonElement) => void;
     getDropdown: (menuId: string|number) => HTMLDivElement;
     getOpenedDropdown: () => null|HTMLDivElement;
@@ -38,6 +39,7 @@ export interface ListingCtxInterface extends ListingProviderState {
 export interface ListingProviderState {
     items: HTMLObject;
     menus: HTMLObject;
+    selectAll: boolean;
 }
 
 type HTMLObject = {[key:string]: HTMLDivElement}
