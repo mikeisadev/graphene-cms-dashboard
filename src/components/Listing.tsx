@@ -1,4 +1,4 @@
-import { useId} from "react";
+import { useId, useState } from "react";
 import { ListingCtxInterface, ListingProps } from "../@types";
 import ListingItem from "./ListingItem";
 import { useListing } from "../context/ListingContext";
@@ -8,12 +8,13 @@ export default function Listing(props: ListingProps) {
 
     const { items } = useListing() as ListingCtxInterface
 
-    function handleClick(e: React.MouseEvent) {
-        Object.keys(items).map(id => {
-            const item = items[id]!.querySelector('.select-item input');
+    function selectAllItems() {
+        console.log('selecting all')
+        selectSingleItem()
+    }
 
-            (e.target as HTMLInputElement).checked ? item?.setAttribute('checked', 'true') : item?.removeAttribute('checked')
-        })
+    function selectSingleItem() {
+
     }
 
     return (
@@ -26,14 +27,14 @@ export default function Listing(props: ListingProps) {
                     <thead>
                         <tr className="listing-head">
                             <th className="w-[45px]">
-                                <input type="checkbox" onClick={handleClick} />
+                                <input type="checkbox" onClick={selectAllItems} />
                             </th>
                             <th>Title</th>
                             <th className="w-[45px] actions"></th>
                         </tr>
                     </thead>
                     <tbody>
-                        {data.map(el => <ListingItem key={useId()} />)}
+                        {data.map(el => <ListingItem key={useId()} selectItem={selectSingleItem} />)}
                     </tbody>
                 </table>
             </div>

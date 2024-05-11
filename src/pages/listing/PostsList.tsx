@@ -14,13 +14,11 @@ export default function PostsList(props: PostsListProps) {
 
     useEffect(() => {
         toggleLoading(true)
-        
-        axios.get('https://jsonplaceholder.typicode.com/users')
-            .then((data) => {
-                setData(data.data)
 
-                toggleLoading(false)
-            })
+        axios.get('https://jsonplaceholder.typicode.com/posts').then(_data => {
+            setData(_data.data)
+            toggleLoading(false)
+        })
     }, [])
 
     return (

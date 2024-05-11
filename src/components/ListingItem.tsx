@@ -6,9 +6,10 @@ import PopUp from "./popups/PopUp";
 import { useListing } from "../context/ListingContext";
 
 export default function ListingItem(props: ListingItemProps) {
-    const { id, title } = props;
+    const { id, title, selected, selectItem } = props;
 
     const [ isDeleting, setIsDeleting ] = useState(false)
+    const [ checked, setChecked ] = useState(false)
 
     /**
      * Listing context.
@@ -71,7 +72,7 @@ export default function ListingItem(props: ListingItemProps) {
     return (
         <tr ref={listingRef} className="listing-item">
             <td className="w-min select-item">
-                <input type="checkbox" />
+                <input type="checkbox" onClick={selectItem} checked={selected} />
             </td>
             <td>
                 <p>Item</p>

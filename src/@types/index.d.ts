@@ -169,6 +169,8 @@ export interface ListingProps {
 export interface ListingItemProps {
     id?: string|number;
     title?: string|number;
+    selected?: boolean;
+    selectItem?: () => void;
 }
 
 /** 
