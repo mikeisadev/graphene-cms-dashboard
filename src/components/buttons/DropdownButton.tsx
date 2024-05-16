@@ -23,7 +23,7 @@ export default function DropdownButton(props: DropdownBtnProps) {
     return (
         <div className="dropdown-btn-wrap">
             <div className="dropdown-btn">
-                <Button className={props.type}>
+                <Button className={props.type} onClick={props.onClick}>
                     {props.icon ? props.icon : ''}
                     {props.text}
                 </Button>

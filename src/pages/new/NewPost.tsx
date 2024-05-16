@@ -1,29 +1,77 @@
 import { useEffect, useState } from "react";
 import PageHeader from "../../components/PageHeader";
-import QuillEditor from "../../components/editors/QuillEditor";
 import DropdownButton from "../../components/buttons/DropdownButton";
 import Button from "../../components/buttons/Button";
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
-import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
-import { PostState } from "../../@types";
+import axios from "axios";
+import FullPostEditor from "../../components/editors/FullPostEditor";
+import dayjs from "dayjs";
 
 export default function NewPost() {
-    const [post, setPost] = useState<PostState>({
-        title: '',
-        slug: '',
-        content: ''
-    })
+    const [post, setPost] = useState<object>({})
+    const [content, setContent] = useState<string>('')
+    const [date, setDate] = useState<any>(dayjs())
+    const [isPublic, setIsPublic] = useState<boolean>(true)
 
-    function handlePostTitle(e: React.ChangeEvent) {
-        const title: String = (e.target as HTMLInputElement).value
+    /**
+     * Handle common fields.
+     */
+    function handleField(val: React.FormEvent<HTMLInputElement>) {
+        const input = val.target as HTMLInputElement
 
-        setPost({...post, title: title})
-        setPost({...post, slug: title.trim().toLowerCase().replace(/\s/g, '-')})
+        const data = {[input.name]: input.value}
+
+        if (input.name === 'title') {
+            data['slug'] = input.value.trim().replace(/\s/g, '-').toLowerCase()
+        }
+
+        setPost({...post, ...data})
     }
 
-    // function handlePostContent(e) {
+    /**
+     * Handle QuillJS content.
+     */
+    function handleContent(value: string) {
+        setContent(value)
+        
+        setPost({...post, content: value})
 
-    // }
+    }
+
+    /**
+     * Handle date.
+     */
+    function handleDate(date: any) {
+        setDate(date)
+
+        setPost({...post, publishDate: date})
+    }
+
+    /**
+     * Handle visibility change.
+     */
+    function handleVisibility(e: any) {
+        setIsPublic(e.target.checked)
+    }
+
+    /**
+     * Save post
+     */
+    function handleSavePost() {
+        const data: object = {
+            ...post,
+            content: content,
+            date: date,
+            visibility: isPublic ? 'public' : 'draft'
+        }
+
+        axios.post('http://localhost:3000/posts', data)
+            .then(data => {
+                console.log(data.data)
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
 
     useEffect(() => {
         console.log(post)
@@ -34,42 +82,22 @@ export default function NewPost() {
             <PageHeader>
                 <div className="flex-between">
                     <h1 className="page-title">New post</h1>
-                    <DropdownButton type="primary-btn" text="Save and publish" dropdownIcon={<i className="bi bi-arrow-return-left"></i>}>
+                    <DropdownButton type="primary-btn" text={`Save and ${isPublic ? 'publish' : 'leave draft'}`} dropdownIcon={<i className="bi bi-arrow-return-left"></i>} onClick={handleSavePost}>
                         <Button text="Save and leave draft"/>
                     </DropdownButton>
                 </div>
             </PageHeader>
-            <div className="new-content-wrap">
-                <div className="new-content">
-                    <div className="main-box">
-                        <div className="field-row">
-                            <label>Title</label>
-                            <input type="text" name="post-title" placeholder="Insert post title here!" onChange={handlePostTitle} />
-                        </div>
-                        <div className="field-row">
-                            <label>Content</label>
-                            <QuillEditor setValue={(value) => {console.log(value)}}/>
-                        </div>
-                    </div>
-                </div>
-                <div className="meta-boxes">
-                    <div className="meta-box">
-                        <Button className="secondary-btn w-full" icon={<i className="bi bi-box-arrow-up-right"></i>} text="Preview"/>
-                    </div>
-                    <div className="meta-box">
-                        <div className="field-row">
-                            <label>Slug</label>
-                            <input type="text" name="post-slug" placeholder="Insert the post slug here..."/>
-                        </div>
-                        <div className="field-row">
-                            <label>Date</label>
-                            <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                <DatePicker />
-                            </LocalizationProvider>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <FullPostEditor 
+                mode="new"
+                postData={post}
+                isPublic={isPublic}
+                date={date}
+                onChange={handleField} 
+                onContentChange={handleContent} 
+                onDateChange={handleDate}
+                onVisibilityChange={handleVisibility}
+                onSave={handleSavePost}
+            />
         </>
     )
 }

@@ -1,3 +1,5 @@
+import { Dayjs } from "dayjs";
+
 /**
  * An interface for react components with childrens ones.
  */
@@ -162,15 +164,16 @@ export interface LinkBoxProps {
  * Listing interface.
  */
 export interface ListingProps {
-    data: Array<Object>;
+    data: object[];
+    columns: object;
 }
 
 /**
  * Listing item.
  */
 export interface ListingItemProps {
-    id?: string|number;
-    title?: string|number;
+    data: object;
+    columns: object;
     selected?: boolean;
     selectItem?: () => void;
 }
@@ -179,15 +182,6 @@ export interface ListingItemProps {
  * Listing dropdown
  */
 export interface ListingDropdownProps extends WithChildrens {}
-
-/**
- * Post state
- */
-export interface PostState {
-    title?: String;
-    slug?: String;
-    content?: String;
-}
 
 /**
  * Quill editor props.
@@ -205,4 +199,20 @@ export interface PopUpProps {
     description?: string;
     close?: () => void;
     proceed?: () => void;
+}
+
+/**
+ * Full post editor interface
+ */
+export interface IFullPostEditor {
+    mode: 'edit' | 'new';
+    postData?: object;
+    content?: string;
+    date?: Dayjs;
+    isPublic?: boolean;
+    onChange: (e: React.FormEvent<HTMLInputElement>) => void;
+    onContentChange: (value: string) => void;
+    onDateChange: (value: any) => void;
+    onVisibilityChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    onSave: () => void;
 }

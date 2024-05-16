@@ -8,6 +8,9 @@
 /* Main styles */
 @import url('./styles/main.css');
 
+/* Text */
+@import url('./styles/text.css');
+
 /* PopUp */
 @import url('./styles/popup.css');
 
@@ -207,11 +210,11 @@
     @apply border-b;
 }
 
-.listing-table tr button {
+.listing-table tr .button {
     @apply w-[30px] h-[30px] rounded-full flex items-center justify-center;
 }
 
-.listing-table tr button.active {
+.listing-table tr .button.active {
     @apply bg-sky-500 text-white rotate-90;
 }
 
@@ -224,15 +227,15 @@
     @apply bg-slate-50 fixed z-[5] left-0 top-0 shadow-md p-2 rounded-md w-[150px] text-sm rounded-md origin-top-right overflow-hidden;
 }
 
-.listing-dropdown button {
+.listing-dropdown .button {
     @apply w-full text-left rounded-sm p-1.5 justify-start;
 }
 
-.listing-dropdown button:hover {
+.listing-dropdown .button:hover {
     @apply text-white bg-sky-500;
 }
 
-.listing-dropdown button.warning:hover {
+.listing-dropdown .button.warning:hover {
     @apply text-white bg-red-600;
 }
 

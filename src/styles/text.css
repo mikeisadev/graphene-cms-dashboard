@@ -1,0 +1,3 @@
+.small-info {
+    @apply text-xs text-slate-600;
+}

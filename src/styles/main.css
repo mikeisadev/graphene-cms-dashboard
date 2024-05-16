@@ -1,5 +1,5 @@
 /* Buttons */
-button {
+.button {
     @apply transition-[background] inline-flex gap-[8px] justify-center;
 }
 
@@ -62,10 +62,10 @@ input[type="text"] {
 }
 
 /* Quill editor */
-.ql-toolbar.ql-snow {
+.ck-editor .ck-sticky-panel .ck.ck-toolbar {
     @apply border-slate-200 rounded-t-md;
 }
 
-.ql-container.ql-snow {
+.ck-content {
     @apply border-slate-200 shadow-inner rounded-b-md h-[500px];
 }

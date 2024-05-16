@@ -4,12 +4,15 @@ import Button from "./buttons/Button";
 import ListingDropdown from "./dropdown/ListingDropdown";
 import PopUp from "./popups/PopUp";
 import { useListing } from "../context/ListingContext";
+import { Link } from "react-router-dom";
 
 export default function ListingItem(props: ListingItemProps) {
-    const { id, title, selected, selectItem } = props;
+    const { data, columns, selected, selectItem } = props;
 
     const [ isDeleting, setIsDeleting ] = useState(false)
     const [ checked, setChecked ] = useState(false)
+
+    console.log(data,columns)
 
     /**
      * Listing context.
@@ -74,14 +77,22 @@ export default function ListingItem(props: ListingItemProps) {
             <td className="w-min select-item">
                 <input type="checkbox" onClick={selectItem} checked={selected} />
             </td>
-            <td>
-                <p>Item</p>
-            </td>
+            {
+                Object.keys(columns).map(col => {
+                    const d = data[col as keyof object]
+
+                    return (
+                        <td className="data-col">
+                            { col === 'title' ? <Link to={`/posts/view/${data._id}`}>{d}</Link> : d}
+                        </td>
+                    )
+                })
+            }
             <td className="actions">
                 <Button ref={actionBtnRef} onClick={handleOpenDropdown} icon={<i className="bi bi-three-dots-vertical"></i>}/>
                 <ListingDropdown ref={dropdownRef} >
                     <Button icon={<i className="bi bi-box-arrow-up-right"></i>}>View</Button>
-                    <Button icon={<i className="bi bi-pencil-square"></i>}>Edit</Button>
+                    <Button link={`/posts/view/${data._id}`} icon={<i className="bi bi-pencil-square"></i>}>Edit</Button>
                     <div className="divider"></div>
                     <Button ref={deleteItem} icon={<i className="bi bi-trash3"></i>} className="warning" onClick={handleItemDelete}>Delete</Button>
                 </ListingDropdown>

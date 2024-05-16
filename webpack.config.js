@@ -12,7 +12,8 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
-const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin')
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const config = {
   entry: {
@@ -25,7 +26,7 @@ const config = {
     clean: true
   },
   mode: 'development',
-  devtool: 'inline-source-map',
+  devtool: false,
   devServer: {
     compress: true,
     port: 9000,
@@ -92,6 +93,7 @@ const config = {
     extensions: ['.tsx','.ts','.jsx','.js']
   },
   plugins: [
+    new BundleAnalyzerPlugin(),
     new ReactRefreshWebpackPlugin(),
     new MiniCssExtractPlugin(),
     new HtmlWebPackPlugin({

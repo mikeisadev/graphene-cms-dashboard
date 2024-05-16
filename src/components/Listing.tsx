@@ -4,7 +4,7 @@ import ListingItem from "./ListingItem";
 import { useListing } from "../context/ListingContext";
 
 export default function Listing(props: ListingProps) {
-    const { data } = props;
+    const { data, columns } = props;
 
     const { items, selectAll, setSelectAll } = useListing() as ListingCtxInterface
 
@@ -28,12 +28,16 @@ export default function Listing(props: ListingProps) {
                             <th className="w-[45px]">
                                 <input type="checkbox" onClick={selectAllItems} />
                             </th>
-                            <th>Title</th>
+                            { 
+                                Object.keys(columns).map(col => {
+                                    return <th className="listing-col">{columns[col as keyof object]}</th>
+                                }) 
+                            }
                             <th className="w-[45px] actions"></th>
                         </tr>
                     </thead>
                     <tbody>
-                        {data.map(el => <ListingItem key={useId()} selected={selectAll} selectItem={selectItem}/>)}
+                        {data.map(el => <ListingItem key={useId()} data={el} columns={columns} selected={selectAll} selectItem={selectItem}/>)}
                     </tbody>
                 </table>
             </div>
