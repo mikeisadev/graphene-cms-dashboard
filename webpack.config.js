@@ -93,7 +93,6 @@ const config = {
     extensions: ['.tsx','.ts','.jsx','.js']
   },
   plugins: [
-    new BundleAnalyzerPlugin(),
     new ReactRefreshWebpackPlugin(),
     new MiniCssExtractPlugin(),
     new HtmlWebPackPlugin({

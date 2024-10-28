@@ -24,7 +24,7 @@ import Sidebar from "./components/Sidebar";
 export default function App() {
     return (
         <DashboardProvider>
-            <BrowserRouter basename="/dist/gp-admin">
+            <BrowserRouter basename="/gp-admin">
                 <Layout 
                     header={<Header />}
                     sidebar={<Sidebar />}
